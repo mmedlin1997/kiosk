@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <title>Kiosk</title>
+   
+   <!-- Remote stylesheets -->
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+   <!-- Remote scripts -->
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+   <!-- Local stylesheets -->
+   <link rel="stylesheet" href="css/stylesheet.css">
+   
+   <!-- Local scripts -->
+   <script src="js/render.js"></script>
+   <script src="js/modal.js"></script>
+   <script src="js/camera.js"></script>
+</head>
+
+<body>
+   <div class="wrapper">
+      <div class="header">
+         <!-- Navbar -->
+         <nav>
+            <div class="nav-wrapper">
+               <ul class="left">
+                  <!-- Modal Trigger -->
+                  <li><a data-target="image-grab-dialog" class="waves-effect waves-light btn modal-trigger" id="cameraButton" onclick="onCameraButtonClick()">Pic <i class="material-icons right">camera_alt</i></a></li>
+               </ul>
+               <a class="brand-logo center">Burger xPress Menu</a>
+               <ul class="right">
+                  <li><a class="waves-effect waves-light btn" id="basketButton" onclick="onBasketButtonClick()">Items <i class="material-icons right">shopping_basket</i></a></li>
+               </ul>
+            </div>
+         </nav>
+
+         <!-- Main Category Menu -->
+         <div class="row">
+            <div class="col s12 teal">
+               <div class="mainMenu"></div>
+            </div>
+         </div>
+      </div>      
+
+      <div class="content">
+         <!-- Sub Category Menu -->
+         <div class="row">
+            <div class="col s12 white">
+               <div class="subMenu"></div>
+            </div>
+         </div>
+      </div>
+   </div>
+
+   <!-- Modal Structure -->
+   <div id="image-grab-dialog" class="modal">
+      <div class="modal-content">
+         <div class="row">
+            <div class="col s6 m6 l6">
+               <h4>Camera</h4>
+               <div class="camera">
+                  <video id="video">Video stream not available.</video>  
+               </div>
+            </div>
+            <div class="col s6 m6 l6">
+               <h4>Output</h4>
+               <div class="output">
+                  <canvas id="canvas"></canvas>
+               </div>
+            </div>
+         </div>
+         <!-- <img id="photo" alt="The screen capture will appear in this box."> -->
+         
+      </div>
+      <div class="modal-footer">
+         <!-- <button id="startbutton">Take photo</button> -->
+         <button class="modal-trigger waves-effect waves-light btn" id="startbutton">Grab</button>
+         <a href="#!" class="modal-close waves-effect waves-green btn">Done</a>
+      </div>
+   </div>
+
+</body>

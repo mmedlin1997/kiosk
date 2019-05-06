@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <title>Kiosk</title>
+   
+   <!-- Remote stylesheets -->
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+   <!-- Remote scripts -->
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+   <!-- Local stylesheets -->
+   <link rel="stylesheet" href="css/stylesheet.css">
+   
+   <!-- Local scripts -->
+   <script src="js/camera.js"></script>
+   <script src="js/modal.js"></script>
+</head>
+
+<body>
+   <!-- Modal Trigger -->
+   <button data-target="modal1" class="btn modal-trigger">Pic</button>
+       
+   <!-- Modal Structure -->
+   <div id="modal1" class="modal">
+      <div class="modal-content">
+         <h4>Camera</h4>
+         <p>Take a picture.</p>
+         <div class="camera">
+            <video id="video">Video stream not available.</video>  
+         </div>
+      
+         <canvas id="canvas"></canvas>
+      
+         <div class="output">
+            <img id="photo" alt="The screen capture will appear in this box.">
+         </div>
+      </div>
+      <div class="modal-footer">
+         <button id="startbutton">Take photo</button>
+         <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
+      
+      
+      </div>
+
+      
+   </div>
+
+</body>

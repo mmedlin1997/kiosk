@@ -1,0 +1,33 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <title>Kiosk</title>
+   
+   <!-- Remote stylesheets -->
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+   <!-- Remote scripts -->
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+   <!-- Local stylesheets -->
+   <link rel="stylesheet" href="css/stylesheet.css">
+   
+   <!-- Local scripts -->
+   <script src="js/camera.js"></script>
+</head>
+
+<body>
+   <div class="camera">
+      <video id="video">Video stream not available.</video>
+      <button id="startbutton">Take photo</button>
+   </div>
+
+   <canvas id="canvas"></canvas>
+
+   <div class="output">
+     <img id="photo" alt="The screen capture will appear in this box.">
+   </div>
+</body>

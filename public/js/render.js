@@ -57,8 +57,8 @@ function onRemoveItem(id) {
    ipcRenderer.send('removeOrderItem-request', id);
 }
 
-function onCameraButtonClick() {
-   
+function onGrabButtonClick() {
+   buildFavoritesMenu();
 }
 
 function onPlaceOrderButtonClick() {
@@ -103,6 +103,7 @@ function buildMainMenu(menuList) {
 
 // Create submenu DOM elements
 function buildSubMenu(data) {
+
    data.forEach(function(element) {
       
       var cardTitle = document.createElement("span");
@@ -259,4 +260,24 @@ function showMessageCard(message) {
    document.querySelector(".subMenu").innerHTML = '';
    document.querySelector(".subMenu").appendChild(cardDiv);
    return;
+}
+
+// Build favorites menu
+function buildFavoritesMenu() {
+   document.querySelector(".subMenu").innerHTML = '';
+   var favorites = [
+      {
+         cost: "1.00",
+         id: "ent-ham",
+         image: "./img/burger.png",
+         name: "Hamburger \n(last time)",
+      },
+      {
+         cost: "2.00",
+         id: "des-van",
+         image: "./img/ice-cream-cone-vanilla.png",
+         name: "Vanilla ice cream \n(most often)",
+      }
+   ];
+   buildSubMenu(favorites);
 }

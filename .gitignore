@@ -67,4 +67,4 @@ ts-gen
 .depshash
 
 # Kiosk specific
-/model/userHistory/data.txt
+/model/userHistory.txt

@@ -20,6 +20,13 @@ app.on('ready', function() {
    userOrder = [];
    currentUser = null;
    
+   // Make sure order history db is initialized
+   var usersOrderHistory = orderHistory.openHistoryFile(historyFile);
+   if (!usersOrderHistory) {
+      usersOrderHistory = {users:{}};
+      orderHistory.saveHistoryFile(historyFile, usersOrderHistory);
+   }
+
    // Show window when ready
    mainWindow.once('ready-to-show', function() {
       mainWindow.show();
@@ -76,6 +83,7 @@ ipcMain.on('placeOrderItem-request', function(e) {
    var usersOrderHistory = orderHistory.openHistoryFile(historyFile);
    if (!usersOrderHistory) {
       usersOrderHistory = {users:{}};
+      orderHistory.saveHistoryFile(historyFile, usersOrderHistory);
    }
 
    // If current user not identified, finish order without history logging
@@ -135,17 +143,46 @@ function idUserFromImg() {
 
 // Build user menu for specific user
 function buildUserMenu(user) {
-   console.log('user is:' + user);
+   var userMenu = [];
   
    // Get order history
    var usersOrderHistory = orderHistory.openHistoryFile(historyFile);
+   
+   // If no history, return empty menu 
    if ( !(user in usersOrderHistory.users) ) {
-      return [];
+      return userMenu;
    }
 
+   // Fill out user menu
    var tmp = usersOrderHistory.users[user];
    var recentItem = orderHistory.getMostRecentlyOrderedItem(tmp);
    var frequentItem = orderHistory.getMostFrequentlyOrderedItem(tmp);
+   
+   var index1 = recentItem.split('-')[0];
+   var recentItemObject = findItemInMenuList(itemMenu[index1], recentItem);
+   recentItemObject.name += ' (most recent)';
 
-   return [recentItem, frequentItem];
+   var index2 = frequentItem.split('-')[0];
+   var frequentItemObject = findItemInMenuList(itemMenu[index2], frequentItem);
+   frequentItemObject.name += ' (most often)';
+
+   return [recentItemObject, frequentItemObject];
+}
+
+function findItemInMenuList(menuList, searchItem) {
+   for (let i=0; i<menuList.length; i++) {
+      if (menuList[i].id == searchItem) {
+         return clone(menuList[i]);
+      }
+   } 
+}
+
+// Clone an object
+function clone(obj) {
+   if (null == obj || "object" != typeof obj) return obj;
+   var copy = obj.constructor();
+   for (var attr in obj) {
+       if (obj.hasOwnProperty(attr)) copy[attr] = obj[attr];
+   }
+   return copy;
 }

@@ -59,16 +59,8 @@ function getMostRecentlyOrderedItem(items) {
          max = new Date(value.date);
       }
    }
-   console.log('mostRecentItem ', mostRecentItem);
 
-   var item =  {
-      cost: "1.00",
-      id: "entreeItems-ham",
-      image: "./img/burger.png",
-      name: "Hamburger",
-   };
-   item.name += ' (recent)';
-   return item;
+   return mostRecentItem;
 }
 
 function getMostFrequentlyOrderedItem(items) {
@@ -82,14 +74,7 @@ function getMostFrequentlyOrderedItem(items) {
       }
    }
 
-   var item = {
-      cost: "2.00",
-      id: "dessertItems-van",
-      image: "./img/ice-cream-cone-vanilla.png",
-      name: "Vanilla ice cream",
-   };
-   item.name += ' (frequent)';
-   return item;
+   return mostFrequentItem;
 }
 
 module.exports = {

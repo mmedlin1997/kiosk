@@ -1,0 +1,26 @@
+{
+  "users": {
+    "mark": {
+      "entreeItems-dbl": {
+        "date": "Thu May 09 2019 08:35:19 GMT-0700 (Pacific Daylight Time)",
+        "qty": 1
+      },
+      "dessertItems-str": {
+        "date": "Thu May 09 2019 08:35:19 GMT-0700 (Pacific Daylight Time)",
+        "qty": 1
+      },
+      "drinkItems-sod": {
+        "date": "Thu May 09 2019 08:35:19 GMT-0700 (Pacific Daylight Time)",
+        "qty": 1
+      },
+      "drinkItems-smo": {
+        "date": "Thu May 09 2019 08:35:36 GMT-0700 (Pacific Daylight Time)",
+        "qty": 5
+      },
+      "comboItems-3": {
+        "date": "Thu May 09 2019 08:35:49 GMT-0700 (Pacific Daylight Time)",
+        "qty": 1
+      }
+    }
+  }
+}

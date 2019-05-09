@@ -2,21 +2,26 @@ const electron = require('electron');
 const {ipcRenderer} = electron;
 
 let currentCategory;
+let currentUser;
 
 // Request the main menu categories on init
 document.addEventListener('DOMContentLoaded', function() {
-   ipcRenderer.send('menu-request', 'menu');
+   ipcRenderer.send('mainMenu-request', 'menu');
 });
 
-ipcRenderer.on('menu-response', function(e, data) {
+ipcRenderer.on('mainMenu-response', function(e, data) {
    buildMainMenu(data);
 });
 
-ipcRenderer.on('submenu-response', function(e, data) {
+ipcRenderer.on('subMenu-response', function(e, data) {
    buildSubMenu(data);
 });
 
-ipcRenderer.on('userAdd-response', function(e, data) {
+ipcRenderer.on('userMenu-response', function(e, data) {
+   buildUserMenu(data);
+});
+
+ipcRenderer.on('addItemToOrder-response', function(e, data) {
    updateBasketButtonQty(data);
 });
 
@@ -40,13 +45,13 @@ function onMouseOut(element) {
 // On main menu item click, clear and request sub menu
 function onMainMenuClick(id) {
    document.querySelector(".subMenu").innerHTML = '';
-   ipcRenderer.send('submenu-request', id);
+   ipcRenderer.send('subMenu-request', id);
    currentCategory = id;
 }
 
 // On sub menu item click, clear and request sub menu
 function onSubMenuClick(id) {
-   ipcRenderer.send('userAdd-request', {currentCategory, id});
+   ipcRenderer.send('addItemToOrder-request', id);
 }
 
 function onBasketButtonClick() {
@@ -58,7 +63,7 @@ function onRemoveItem(id) {
 }
 
 function onGrabButtonClick() {
-   buildFavoritesMenu();
+   ipcRenderer.send('userMenu-request', 'img');
 }
 
 function onPlaceOrderButtonClick() {
@@ -263,21 +268,7 @@ function showMessageCard(message) {
 }
 
 // Build favorites menu
-function buildFavoritesMenu() {
+function buildUserMenu(data) {
    document.querySelector(".subMenu").innerHTML = '';
-   var favorites = [
-      {
-         cost: "1.00",
-         id: "ent-ham",
-         image: "./img/burger.png",
-         name: "Hamburger \n(last time)",
-      },
-      {
-         cost: "2.00",
-         id: "des-van",
-         image: "./img/ice-cream-cone-vanilla.png",
-         name: "Vanilla ice cream \n(most often)",
-      }
-   ];
-   buildSubMenu(favorites);
+   buildSubMenu(data);
 }

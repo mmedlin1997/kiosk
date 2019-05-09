@@ -6,11 +6,11 @@ const orderHistory = require('./util/orderHistory');
 
 const {app, BrowserWindow, Menu, ipcMain} = electron;
 
-const historyFile = path.join(__dirname, 'model', 'data.txt')
+const historyFile = path.join(__dirname, 'model', 'userHistory.txt')
 
 let mainWindow;
 let userOrder;
-let currentUser = "mark";
+let currentUser;
 
 // Listen for app to be ready
 app.on('ready', function() {
@@ -18,7 +18,8 @@ app.on('ready', function() {
    // Create new window
    mainWindow = new BrowserWindow({ show: false });
    userOrder = [];
-
+   currentUser = null;
+   
    // Show window when ready
    mainWindow.once('ready-to-show', function() {
       mainWindow.show();
@@ -39,18 +40,25 @@ app.on('ready', function() {
 });
 
 // Handle requests from front end
-ipcMain.on('menu-request', function(e, arg) {
-   e.sender.send('menu-response', itemMenu[arg]);
+ipcMain.on('mainMenu-request', function(e, arg) {
+   e.sender.send('mainMenu-response', itemMenu[arg]);
 });
 
-ipcMain.on('submenu-request', function(e, arg) {
-   e.sender.send('submenu-response', itemMenu[arg]);
+ipcMain.on('subMenu-request', function(e, arg) {
+   e.sender.send('subMenu-response', itemMenu[arg]);
 });
 
-ipcMain.on('userAdd-request', function(e, arg) {
-   var value = search(itemMenu[arg.currentCategory], arg.id);
+ipcMain.on('userMenu-request', function(e, img) {
+   currentUser = idUserFromImg(img);
+   userMenu = buildUserMenu(currentUser);
+   e.sender.send('userMenu-response', userMenu);
+});
+
+ipcMain.on('addItemToOrder-request', function(e, id) {
+   var category = id.split('-')[0];
+   var value = search(itemMenu[category], id);
    userOrder.push(value);
-   e.sender.send('userAdd-response', userOrder.length);
+   e.sender.send('addItemToOrder-response', userOrder.length);
 });
 
 ipcMain.on('basketItems-request', function(e, arg) {
@@ -111,4 +119,33 @@ function isEmpty(obj) {
       if(obj.hasOwnProperty(key))
          return false;
    }
+}
+
+// Determine user from image
+function idUserFromImg() {
+   // Send to AWS REK, and get user id
+   var rekognized = true;
+
+   if (rekognized) {
+      return 'mark'
+   } else {
+      return null;
+   }
+}
+
+// Build user menu for specific user
+function buildUserMenu(user) {
+   console.log('user is:' + user);
+  
+   // Get order history
+   var usersOrderHistory = orderHistory.openHistoryFile(historyFile);
+   if ( !(user in usersOrderHistory.users) ) {
+      return [];
+   }
+
+   var tmp = usersOrderHistory.users[user];
+   var recentItem = orderHistory.getMostRecentlyOrderedItem(tmp);
+   var frequentItem = orderHistory.getMostFrequentlyOrderedItem(tmp);
+
+   return [recentItem, frequentItem];
 }

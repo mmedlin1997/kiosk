@@ -28,19 +28,19 @@ const menu = [
 
 const comboItems = [
    {
-      id: "com-1",
+      id: "comboItems-1",
       name: "Combo 1",
       cost: "5.00",
       image: "./img/combo1.png",
    },
    {
-      id: "com-2",
+      id: "comboItems-2",
       name: "Combo 2", 
       cost: "6.00",
       image: "./img/combo2.png",
    },
    {
-      id: "com-3",
+      id: "comboItems-3",
       name: "Combo 3", 
       cost: "7.00",
       image: "./img/combo3.png",
@@ -49,19 +49,19 @@ const comboItems = [
 
 const entreeItems = [
    {
-      id: "ent-ham",
+      id: "entreeItems-ham",
       name: "Hamburger",
       cost: "1.00",
       image: "./img/burger.png",
    },
    {
-      id: "ent-dbl",
+      id: "entreeItems-dbl",
       name: "Double burger", 
       cost: "2.00",
       image: "./img/double-burger.png",
    },
    {
-      id: "ent-chi",
+      id: "entreeItems-chi",
       name: "Chicken Sandwich", 
       cost: "2.00",
       image: "./img/chicken-sandwich.png",
@@ -70,13 +70,13 @@ const entreeItems = [
 
 const sideItems = [
    {
-      id: "sid-fri",
+      id: "sideItems-fri",
       name: "Fries",
       cost: "1.00",
       image: "./img/fries.png",
    },
    {
-      id: "sid-sal",
+      id: "sideItems-sal",
       name: "Side Salad", 
       cost: "2.00",
       image: "./img/salad.png",
@@ -85,25 +85,25 @@ const sideItems = [
 
 const drinkItems = [
    {
-      id: "dri-sod",
+      id: "drinkItems-sod",
       name: "Soda",
       cost: "1.00",
       image: "./img/soda.png",
    },
    {
-      id: "dri-tea",
+      id: "drinkItems-tea",
       name: "Tea", 
       cost: "2.00",
       image: "./img/ice-tea.png",
    },
    {
-      id: "dri-cof",
+      id: "drinkItems-cof",
       name: "Iced coffee", 
       cost: "2.00",
       image: "./img/iced-coffee.png",
    },
    {
-      id: "dri-smo",
+      id: "drinkItems-smo",
       name: "Smoothie", 
       cost: "2.00",
       image: "./img/smoothie.png",
@@ -112,19 +112,19 @@ const drinkItems = [
 
 const dessertItems = [
    {
-      id: "des-van",
+      id: "dessertItems-van",
       name: "Vanilla ice cream", 
       cost: "2.00",
       image: "./img/ice-cream-cone-vanilla.png",
    },
    {
-      id: "des-cho",
+      id: "dessertItems-cho",
       name: "Chocolate ice cream", 
       cost: "2.00",
       image: "./img/ice-cream-cone-chocolate.png",
    },
    {
-      id: "des-str",
+      id: "dessertItems-str",
       name: "Strawberry ice cream", 
       cost: "2.00",
       image: "./img/ice-cream-cone-strawberry.png",

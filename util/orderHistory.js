@@ -1,22 +1,5 @@
 const fs = require('fs');
 
-// var users = {
-//    "mark": {
-//       "sid-fri": {
-//          date: new Date(2019, 4, 1, 7, 30, 31),
-//          qty: 2,
-//       },
-//       "com-1": {
-//          date: new Date(2019, 2, 1, 7, 30, 31),
-//          qty: 1,
-//       },
-//       "des-van": {
-//          date: new Date(2019, 3, 1, 7, 30, 31),
-//          qty: 3,
-//       },
-//    }
-// };
-
 function orderHistoryToString(user) {
    var str = "";
 
@@ -66,4 +49,54 @@ function saveHistoryFile(file, data) {
    });
 }
 
-module.exports = {orderHistoryToString, updateOrderHistory, openHistoryFile, saveHistoryFile};
+function getMostRecentlyOrderedItem(items) {
+   var max = new Date(1970);
+   var mostRecentItem = '';
+   for (let [key, value] of Object.entries(items)) {
+      tmp = new Date(value.date);
+      if (tmp.getTime() > max.getTime()) {
+         mostRecentItem = key;
+         max = new Date(value.date);
+      }
+   }
+   console.log('mostRecentItem ', mostRecentItem);
+
+   var item =  {
+      cost: "1.00",
+      id: "entreeItems-ham",
+      image: "./img/burger.png",
+      name: "Hamburger",
+   };
+   item.name += ' (recent)';
+   return item;
+}
+
+function getMostFrequentlyOrderedItem(items) {
+   max = 0;
+   mostFrequentItem = '';
+   for (let [key, value] of Object.entries(items)) {
+      console.log(key, value);
+      if (value.qty > max) {
+         mostFrequentItem = key;
+         max = value.qty;
+      }
+   }
+
+   var item = {
+      cost: "2.00",
+      id: "dessertItems-van",
+      image: "./img/ice-cream-cone-vanilla.png",
+      name: "Vanilla ice cream",
+   };
+   item.name += ' (frequent)';
+   return item;
+}
+
+module.exports = {
+   orderHistoryToString, 
+   updateOrderHistory, 
+   openHistoryFile, 
+   saveHistoryFile,
+   getMostRecentlyOrderedItem,
+   getMostFrequentlyOrderedItem,
+};
